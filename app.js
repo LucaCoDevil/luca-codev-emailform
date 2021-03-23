@@ -11,14 +11,14 @@ const PORT = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(bodyParser.urlencoded({
+app.use(express.urlencoded({
     extended: true
 }))
 
 app.use(express.static('public'));
 
 app.get("/", function (req, res) {
-    res.sendfile(__dirname + "/src/signup.html")
+    res.sendFile(__dirname + "/src/signup.html")
 })
 
 app.post("/", function (req, res) {
@@ -49,9 +49,9 @@ app.post("/", function (req, res) {
     const request = https.request(url, options, function (response) {
 
         if (response.statusCode === 200) {
-            res.sendfile(__dirname + "/src/success.html");
+            res.sendFile(__dirname + "/src/success.html");
         } else {
-            res.sendfile(__dirname + "/src/failure.html");
+            res.sendFile(__dirname + "/src/failure.html");
         }
 
         response.on("data", function (data) {
