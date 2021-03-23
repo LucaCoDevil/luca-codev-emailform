@@ -6,6 +6,8 @@ const {
     response
 } = require('express');
 
+const PORT = process.env.PORT || 5000;
+
 
 const app = express();
 
@@ -37,10 +39,10 @@ app.post("/", function (req, res) {
 
     const jsonData = JSON.stringify(data);
 
-    const url = "https://us17.api.mailchimp.com/3.0/lists/32b162c169"
+    const url = process.env.MAILCHIMP_URI;
     const options = {
         method: "POST",
-        auth: "luca12:9cf47d7ef1448c0c4d74e999c62f9045-us17"
+        auth: process.env.AUTH
     }
 
 
@@ -66,9 +68,7 @@ app.post("/failure", function (req, res) {
 })
 
 
-app.listen(process.env.PORT || 3000, function () {
-    console.log("server is runnning on port 3000");
+app.listen(PORT, function () {
+    console.log(`server running on port ${PORT}`);
 })
 
-// 9cf47d7ef1448c0c4d74e999c62f9045-us17 --API ID
-// 32b162c169 --LIST ID
